@@ -12,15 +12,9 @@ type Spellers struct {
 
 //speller output model
 type SpellerResponse struct {
-	Code int `json:"code"`
-	Pos  int `json:"pos"`
-	Row  int `json:"row"`
+	//Code int `json:"code"`
+	Pos  int      `json:"pos"`
+	Row  int      `json:"row"`
 	Word string   `json:"word"`
 	S    []string `json:"s"`
-}
-
-//speller output model
-type SpellersResponse struct {
-	TextId int               `json:"text"`
-	Words  []SpellerResponse `json:"words"`
 }

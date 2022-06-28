@@ -39,6 +39,18 @@ func TestHandler_postText(t *testing.T) {
 			expectedResponseBody: `{"text":[]}`,
 		},
 		{
+			name:      "Ok with error",
+			inputBody: `{"text" : "У зверей взраслеет смена"}`,
+			inputStruct: model.Speller{
+				Text: "У зверей взраслеет смена",
+			},
+			mockBehavior: func(s *mock_service.MockSpeller, ctx context.Context, text model.Speller) {
+				s.EXPECT().CreateOne(gomock.Any(), text).Return([]model.SpellerResponse{{Pos: 9, Row: 0, Word: "взраслеет", S: []string{"взрослеет"}}}, nil)
+			},
+			expectedStatusCode:   200,
+			expectedResponseBody: `{"text":[{"pos":9,"row":0,"word":"взраслеет","s":["взрослеет"]}]}`,
+		},
+		{
 			name:                 "Wrong Input",
 			inputBody:            `{"texts": "У зверей взраслеет смена"}`,
 			inputStruct:          model.Speller{},
@@ -93,7 +105,6 @@ func TestHandler_postText(t *testing.T) {
 func TestHandler_postMany(t *testing.T) {
 	// Init Test Table
 	type mockBehavior func(s *mock_service.MockSpeller, ctx context.Context, text model.Spellers)
-
 	tests := []struct {
 		name                 string
 		inputBody            string

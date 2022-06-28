@@ -24,13 +24,13 @@ func TestSpellerService_CheckOne(t *testing.T) {
 		{
 			name:    "Ошибки",
 			text:    "У зверей взраслеет смена",
-			want:    []model.SpellerResponse{{Code: 1, Pos: 9, Row: 0, Word: "взраслеет", S: []string{"взрослеет"}}},
+			want:    []model.SpellerResponse{{Pos: 9, Row: 0, Word: "взраслеет", S: []string{"взрослеет"}}},
 			wantErr: false,
 		},
 		{
 			name:    "Невалид",
 			text:    "У зверей 塞雷吉 смена",
-			want:    []model.SpellerResponse{{Code: 4, Pos: 0, Row: 0, Word: "У зверей 塞雷吉 смена", S: []string{"У зверей 塞雷吉 смена"}}},
+			want:    []model.SpellerResponse{{Pos: 0, Row: 0, Word: "У зверей 塞雷吉 смена", S: []string{"У зверей 塞雷吉 смена"}}},
 			wantErr: false,
 		},
 	}
@@ -65,14 +65,14 @@ func TestSpellerService_CheckMany(t *testing.T) {
 		{
 			name: "Ошибки",
 			text: []string{"У зверей взраслеет смена", "Не обижайте лесных малашей"},
-			want: [][]model.SpellerResponse{[]model.SpellerResponse{model.SpellerResponse{Code: 1, Pos: 9, Row: 0, Word: "взраслеет", S: []string{"взрослеет"}}},
-				[]model.SpellerResponse{model.SpellerResponse{Code: 1, Pos: 19, Row: 0, Word: "малашей", S: []string{"малышей", "шалашей"}}}},
+			want: [][]model.SpellerResponse{[]model.SpellerResponse{model.SpellerResponse{Pos: 9, Row: 0, Word: "взраслеет", S: []string{"взрослеет"}}},
+				[]model.SpellerResponse{model.SpellerResponse{Pos: 19, Row: 0, Word: "малашей", S: []string{"малышей", "шалашей"}}}},
 			wantErr: false,
 		},
 		{
 			name:    "Невалид",
 			text:    []string{"У зверей 塞雷吉 смена"},
-			want:    [][]model.SpellerResponse{[]model.SpellerResponse{model.SpellerResponse{Code: 4, Pos: 0, Row: 0, Word: "У зверей 塞雷吉 смена", S: []string{"У зверей 塞雷吉 смена"}}}},
+			want:    [][]model.SpellerResponse{[]model.SpellerResponse{model.SpellerResponse{Pos: 0, Row: 0, Word: "У зверей 塞雷吉 смена", S: []string{"У зверей 塞雷吉 смена"}}}},
 			wantErr: false,
 		},
 	}
