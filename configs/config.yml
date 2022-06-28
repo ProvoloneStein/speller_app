@@ -1,0 +1,6 @@
+port: "8000"
+
+yandex_speller:
+  url: "https://speller.yandex.net/services/spellservice.json/"
+  lang: "ru"
+  format: "plain"
